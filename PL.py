@@ -45,22 +45,22 @@ def initialize_output_dataframes(dataframes):
 
 def mapping_preparing(dataframes_with , output_dataframes):
     for key, withdraw_df in tqdm(dataframes_with.items(), desc="データ転記前の準備中..."):
-    output_key = f"{key}_output"
-    if output_key in output_dataframes:
-        output_df = output_dataframes[output_key]
+        output_key = f"{key}_output"
+        if output_key in output_dataframes:
+            output_df = output_dataframes[output_key]
 
-        # NaN行のクリーニング
-        output_df.dropna(how='all', inplace=True)
+            # NaN行のクリーニング
+            output_df.dropna(how='all', inplace=True)
 
-        # 転記するデータの数に基づいて行を追加
-        needed_rows = len(withdraw_df)
-        current_rows = len(output_df)
-        additional_rows = needed_rows - (current_rows - output_df.last_valid_index() - 1)
+            # 転記するデータの数に基づいて行を追加
+            needed_rows = len(withdraw_df)
+            current_rows = len(output_df)
+            additional_rows = needed_rows - (current_rows - output_df.last_valid_index() - 1)
 
-        if additional_rows > 0:
-            new_rows = pd.DataFrame(np.nan, index=range(additional_rows), columns=output_df.columns)
-            output_df = pd.concat([output_df, new_rows], ignore_index=True)
-        
-        output_dataframes[output_key] = output_df  # 更新されたDataFrameを再格納
+            if additional_rows > 0:
+                new_rows = pd.DataFrame(np.nan, index=range(additional_rows), columns=output_df.columns)
+                output_df = pd.concat([output_df, new_rows], ignore_index=True)
+            
+            output_dataframes[output_key] = output_df  # 更新されたDataFrameを再格納
 
-print('行追加完了🌟')
+        print('行追加完了🌟')
