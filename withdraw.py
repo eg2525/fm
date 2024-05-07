@@ -41,7 +41,7 @@ def withdraw_mapping(dataframes_with):
 	        # 更新されたDataFrameを辞書に再格納
 	        dataframes_with[store_withdraw] = df_with
 	    else:
-	        print(f"店舗コード {store_withdraw}: 必要な列が見つかりません。")
+	        st.write(f"店舗コード {store_withdraw}: 必要な列が見つかりません。")
 
-	print("処理完了🌸")
+	st.write("引出金転記準備が完了🌸")
 	return dataframes_with
