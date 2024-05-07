@@ -51,6 +51,11 @@ if uploaded_files is not None and withdraw_path is not None:
 		    zip_buffer.seek(0)
 		    return zip_buffer
 
+		# すべての処理が終わったらZIPファイルを自動で生成
+		if 'output_dataframes' not in st.session_state:
+		    # データフレーム生成処理（サンプル）
+		    st.session_state.output_dataframes = {"example": pd.DataFrame({"A": [1, 2, 3]})}
+
 		# ZIPファイルを生成
 		zip_buffer = create_zip(st.session_state.output_dataframes)
 
