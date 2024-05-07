@@ -30,7 +30,7 @@ def tax_mapping(tax_data_path, output_dataframes):
         # 更新されたDataFrameを保存
         output_dataframes[key] = output_df    
         
-    print("消費税転記が完了🎉")
+    st.write("消費税転記が完了🎉")
     return output_dataframes
 
 
