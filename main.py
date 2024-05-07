@@ -11,7 +11,7 @@ uploaded_Withfile = st.file_uploader("引出金ファイルをアップロード
 
 
 # ファイルがアップロードされた後、'OK'ボタンが押されるのを待つ
-if uploaded_file is not None:
+if uploaded_PLfile is not None and uploaded_Withfile is not None:
     if st.checkbox('Start'):
         # フォルダ内の全てのExcelファイルをループ処理
         excel_files = [f for f in os.listdir(uploaded_PLfile) if f.endswith('.xlsx')]
