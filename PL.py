@@ -4,17 +4,16 @@ from tqdm import tqdm
 
 def PL_road(uploaded_files):
     dataframes = {}
-    for uploaded_file in tqdm(uploaded_files, desc="ファイルデータの取得中..."):
-        # ファイル名を取得（Streamlit UploadedFileオブジェクトから）
+    total_files = len(uploaded_files)  # アップロードされたファイルの総数
+    progress_bar = st.progress(0)  # 進捗バーを0%で初期化
+
+    for i, uploaded_file in enumerate(uploaded_files):
         file_name = uploaded_file.name
-        
-        # アップロードされたファイルからデータフレームを読み込む
-        # UploadedFileオブジェクトを利用して直接Pandasで読み込む
-        df = pd.read_excel(uploaded_file, header=6)  # 適切なヘッダー行を設定
-
-        # DataFrameをディクショナリに格納（キーはファイル名）
+        df = pd.read_excel(uploaded_file, header=6)  # ファイルからDataFrameを読み込む
         dataframes[file_name] = df
+        progress_bar.progress((i + 1) / total_files)  # 進捗バーを更新
 
+    progress_bar.empty()  # 処理終了後に進捗バーを非表示にする
     return dataframes
 
 def initialize_output_dataframes(dataframes):
