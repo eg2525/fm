@@ -6,17 +6,18 @@ import streamlit as st
 st.title("FM分割")
 
 # ファイルアップロードウィジェットを表示し、ファイルをアップロード
-uploaded_PLfile = st.file_uploader("P/Lファイルをアップロードしてください", type=['xlsx'])
-uploaded_Withfile = st.file_uploader("引出金ファイルをアップロードしてください", type=['xlsx'])
+uploaded_PLfiles = st.file_uploader("P/Lファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
+uploaded_Withfiles = st.file_upoader("引出金ファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
+
 
 
 # ファイルがアップロードされた後、'OK'ボタンが押されるのを待つ
-if uploaded_PLfile is not None and uploaded_Withfile is not None:
+if uploaded_PLfiles is not None and uploaded_Withfiles is not None:
     if st.checkbox('Start'):
         # フォルダ内の全てのExcelファイルをループ処理
-        excel_files = [f for f in os.listdir(uploaded_PLfile) if f.endswith('.xlsx')]
+        excel_files = [f for f in os.listdir(uploaded_PLfiles) if f.endswith('.xlsx')]
         for file_name in tqdm(excel_files, desc="ファイルデータの取得中..."):
-            file_path = os.path.join(uploaded_PLfile, file_name)
+            file_path = os.path.join(uploaded_PLfiles, file_name)
             
             df = pd.read_excel(file_path, usecols=[1], nrows=2)
             store_code = str(df.iloc[1, 0])
