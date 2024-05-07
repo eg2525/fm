@@ -161,16 +161,3 @@ def dropping_df(output_dataframes):
 
 	st.write('不要行削除完了🌟')
 	return output_dataframes
-
-# アウトプット
-def output_to_csv(output_dataframes):
-    # メモリストリームを用いたZIPファイルの作成
-    zip_buffer = BytesIO()
-    with zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False) as zip_file:
-        for key, output_df in output_dataframes.items():
-            # メモリ内でCSVファイルを作成
-            csv_buffer = BytesIO()
-            output_df.to_csv(csv_buffer, encoding='utf-8-sig', index=False, float_format='%.0f')
-            csv_buffer.seek(0)
-            zip_file.writestr(f"{key}.csv", csv_buffer.getvalue())
-    return zip_buffer
