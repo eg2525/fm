@@ -14,7 +14,7 @@ def PL_road(uploaded_files):
         progress_bar.progress((i + 1) / total_files)  # 進捗バーを更新
 
     progress_bar.empty()  # 処理終了後に進捗バーを非表示にする
-    st.write('PLデータの読み取りが完了')
+    st.write('PLデータの読み取りが完了🎉')
     return dataframes
 
 def initialize_output_dataframes(dataframes):
@@ -25,15 +25,18 @@ def initialize_output_dataframes(dataframes):
     ] 
     # 新しいDataFrameを格納する辞書
     output_dataframes = {}
+    progress_bar = st.progress(0)  # 進捗バーを0%で初期化
 
     # dataframes 辞書内の各店舗DataFrameに対して処理を実行
-    for store_code, df in tqdm(dataframes.items(), desc="店舗データ処理中..."):
+    for store_code, df in dataframes.items():
         new_df = pd.DataFrame(columns=columns_op, index=range(27), data=np.nan)
         
         # 新しいDataFrameを辞書に格納
         output_dataframes[f"{store_code}_output"] = new_df
+        progress_bar.progress((i + 1) / total_files)
 
-    print('出力用のデータフレーム作成完了🎉')
+    progress_bar.empty()  # 処理終了後に進捗バーを非表示にする
+    st.write('アウトプット用データの準備が完了🎉')
     return output_dataframes
 
 def mapping_preparing(dataframes_with , output_dataframes):
