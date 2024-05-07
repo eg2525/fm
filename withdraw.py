@@ -8,27 +8,22 @@ import zipfile
 
 
 #引出金の処理
-def withdraw_preparing(withdraw_path):
-	#folder_path = r'C:\Users\inagaki23\Desktop\FamilyMart\Fm_Withdrawals'
-	# 辞書を用いて店舗番号に基づいたDataFrameを格納
-	dataframes_with = {}
+def withdraw_preparing(uploaded_files):
+    dataframes_with = {}
 
-	# フォルダ内の全てのExcelファイルをループ処理
-	excel_files_with = [f for f in os.listdir(folder_path) if f.endswith('.xlsx')]
-	for file_name in tqdm(excel_files_with, desc="引出金データ取得中"):
-	    file_path = os.path.join(folder_path, file_name)
-	    
-	    df = pd.read_excel(file_path, usecols=[2], nrows=6)
-	    store_withdraw = str(df.iloc[3, 0])
-	    
-	    # 引出金データを含むDataFrameを読み込む
-	    df_with = pd.read_excel(file_path, header=6, nrows=15)
-	    
-	    # 辞書にDataFrameを店舗コードとともに格納
-	    dataframes_with[f"df_{store_withdraw}"] = df_with
-	    
-	st.write("引出金読み取り完了🎉")
-	return dataframes_with
+    # アップロードされたファイルのリストをループ処理
+    for uploaded_file in uploaded_files:
+        file_name = uploaded_file.name
+        # 店舗コードを含むセルのデータを読み取り
+        store_withdraw_df = pd.read_excel(uploaded_file, usecols=[2], nrows=6)
+        store_withdraw = str(store_withdraw_df.iloc[3, 0])  # 4行目のデータをstore_withdrawとして取得
+
+        # 引出金データ全体を読み込む
+        df_with = pd.read_excel(uploaded_file, header=6, nrows=15)  # ファイルからDataFrameを読み込む
+        dataframes_with[f"df_{store_withdraw}"] = df_with
+
+    st.write("引出金読み取り完了🎉")
+    return dataframes_with
 
 # 既存のdataframes_with辞書から各DataFrameを処理
 def withdraw_mapping(dataframes_with):
