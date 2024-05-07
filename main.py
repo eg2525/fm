@@ -40,22 +40,27 @@ if uploaded_files is not None and withdraw_path is not None:
 
 		output_dataframes = dropping_df(output_dataframes)
 
-	    # メモリストリームを用いたZIPファイルの作成
-	    zip_buffer = BytesIO()
-	    with zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False) as zip_file:
-	        for key, output_df in output_dataframes.items():
-	            # メモリ内でCSVファイルを作成
-	            csv_buffer = BytesIO()
-	            output_df.to_csv(csv_buffer, encoding='cp932', index=False, float_format='%.0f')
-	            csv_buffer.seek(0)
-	            zip_file.writestr(f"{key}.csv", csv_buffer.getvalue())
-	    zip_buffer.seek(0)
-	    st.download_button(
-	        label="Download CSV Files as ZIP",
-	        data=zip_buffer,
-	        file_name="output_files.zip",
-	        mime="application/zip"
-	    )    
+		def create_zip(output_dataframes):
+		    zip_buffer = BytesIO()
+		    with zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False) as zip_file:
+		        for key, output_df in output_dataframes.items():
+		            csv_buffer = BytesIO()
+		            output_df.to_csv(csv_buffer, encoding='cp932', index=False, float_format='%.0f')
+		            csv_buffer.seek(0)
+		            zip_file.writestr(f"{key}.csv", csv_buffer.getvalue())
+		    zip_buffer.seek(0)
+		    return zip_buffer
+
+		# ZIPファイルを生成
+		zip_buffer = create_zip(st.session_state.output_dataframes)
+
+		# ZIPファイルダウンロード用のボタンを表示
+		st.download_button(
+		    label="Download CSV Files as ZIP",
+		    data=zip_buffer,
+		    file_name="output_files.zip",
+		    mime="application/zip"
+		)
 
 		_ = '''
 		# ドロップダウンメニューからデータフレームを選択
