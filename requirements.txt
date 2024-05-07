@@ -3,5 +3,3 @@ streamlit
 xlrd
 openpyxl 
 xlsxwriter
-os
-numpy
