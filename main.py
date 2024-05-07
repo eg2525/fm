@@ -20,18 +20,13 @@ if uploaded_files is not None and uploaded_Withfiles is not None:
 
 		output_dataframes = initialize_output_dataframes(dataframes)
 
-		# 利用可能なすべてのデータフレームのキーを表示
-		if dataframes:
-		    st.write("利用可能なデータフレームのキー:")
-		    for key in dataframes.keys():
-		        st.write(key)
-		else:
-		    st.write("データフレームはまだ生成されていません。")
-
+		'''
 		# ドロップダウンメニューからデータフレームを選択
 		file_name_to_view = st.selectbox("データフレームを選択してください", list(dataframes.keys()))
 
 		# 選択されたデータフレームを表示
 		if file_name_to_view:
 		    st.dataframe(dataframes[file_name_to_view])
+		'''
 
+		output_dataframes = mapping_df(dataframes, output_dataframes)

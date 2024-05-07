@@ -24,7 +24,7 @@ def mapping_df(dataframes, output_dataframes):
 	}
 
 	# dataframes および output_dataframes のデータを転記
-	for key, df in tqdm(dataframes.items(), desc='インポートデータ作成中...'):
+	for key, df in dataframes.items():
 	    output_key = f"{key}_output"
 	    if output_key in output_dataframes:
 	        output_df = output_dataframes[output_key]
