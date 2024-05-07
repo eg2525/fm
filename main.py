@@ -35,6 +35,10 @@ if uploaded_files is not None and withdraw_path is not None:
 		output_dataframes = PL_mapping(dataframes_with, output_dataframes)
 
 		output_dataframes = tax_adjustment(df_tax_info,output_dataframes)
+
+		output_dataframes = adjustment_df(output_dataframes)
+
+		output_dataframes = dropping_df(output_dataframes)
 		
 		# ドロップダウンメニューからデータフレームを選択
 		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))

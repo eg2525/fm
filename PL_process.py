@@ -133,7 +133,7 @@ def adjustment_df(output_dataframes):
 	    # DataFrameを更新
 	    output_dataframes[key] = output_df
 
-	print('差額調整完了🌟')
+	st.write('差額調整完了🌟')
 	return output_dataframes
 
 #最終調整
@@ -159,7 +159,7 @@ def dropping_df(output_dataframes):
 	    # 更新されたDataFrameを再格納
 	    output_dataframes[key] = output_df
 
-	print('不要行削除完了🌟')
+	st.write('不要行削除完了🌟')
 	return output_dataframes
 
 # アウトプット
