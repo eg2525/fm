@@ -23,21 +23,18 @@ def PL_road(uploaded_files):
 
 def initialize_output_dataframes(dataframes):
     columns_op =[
-        "月種別","種類","形式","作成方法","付箋","伝票日付","伝票番号","伝票摘要","枝番","借方部門","借方部門名","借方科目","借方科目名","借方補助","借方補助科目名","借方金額","借方消費税コード","借方消費税業種","借方消費税税率",
-        "借方資金区分","借方任意項目１","借方任意項目２","借方インボイス情報","貸方部門","貸方部門名","貸方科目","貸方科目名","貸方補助","貸方補助科目名","貸方金額","貸方消費税コード","貸方消費税業種","貸方消費税税率",
-        "貸方資金区分","貸方任意項目１","貸方任意項目２","貸方インボイス情報","摘要","期日","証番号","入力マシン","入力ユーザ","入力アプリ","入力会社","入力日付"
+        "月種別", "種類", "形式", "作成方法", "付箋", "伝票日付", "伝票番号", "伝票摘要", "枝番", "借方部門", "借方部門名", "借方科目", "借方科目名", "借方補助", "借方補助科目名", "借方金額", "借方消費税コード", "借方消費税業種", "借方消費税税率",
+        "借方資金区分", "借方任意項目１", "借方任意項目２", "借方インボイス情報", "貸方部門", "貸方部門名", "貸方科目", "貸方科目名", "貸方補助", "貸方補助科目名", "貸方金額", "貸方消費税コード", "貸方消費税業種", "貸方消費税税率",
+        "貸方資金区分", "貸方任意項目１", "貸方任意項目２", "貸方インボイス情報", "摘要", "期日", "証番号", "入力マシン", "入力ユーザ", "入力アプリ", "入力会社", "入力日付"
     ] 
-    # 新しいDataFrameを格納する辞書
     output_dataframes = {}
+    total_files = len(dataframes)  # アイテムの総数を取得
     progress_bar = st.progress(0)  # 進捗バーを0%で初期化
 
-    # dataframes 辞書内の各店舗DataFrameに対して処理を実行
-    for store_code, df in dataframes.items():
+    for i, (store_code, df) in enumerate(dataframes.items()):
         new_df = pd.DataFrame(columns=columns_op, index=range(27), data=np.nan)
-        
-        # 新しいDataFrameを辞書に格納
         output_dataframes[f"{store_code}_output"] = new_df
-        progress_bar.progress((i + 1) / total_files)
+        progress_bar.progress((i + 1) / total_files)  # 進捗バーを更新
 
     progress_bar.empty()  # 処理終了後に進捗バーを非表示にする
     st.write('アウトプット用データの準備が完了🎉')
