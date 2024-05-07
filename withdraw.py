@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import os
+import streamlit as st
+from io import BytesIO
+import zipfile
 
 
 #引出金の処理
@@ -24,7 +27,7 @@ def withdraw_preparing(withdraw_path):
 	    # 辞書にDataFrameを店舗コードとともに格納
 	    dataframes_with[f"df_{store_withdraw}"] = df_with
 	    
-	print("引出金読み取り完了🎉")
+	st.write("引出金読み取り完了🎉")
 	return dataframes_with
 
 # 既存のdataframes_with辞書から各DataFrameを処理
