@@ -2,26 +2,19 @@ import os
 import pandas as pd
 from tqdm import tqdm
 
-def PL_road(folder_path):
-    # フォルダ内の全てのExcelファイルをループ処理
-    excel_files = [f for f in os.listdir(folder_path) if f.endswith('.xlsx')]
+def PL_road(uploaded_files):
     dataframes = {}
-    for file_name in tqdm(excel_files, desc="ファイルデータの取得中..."):
-        file_path = os.path.join(folder_path, file_name)
+    for uploaded_file in tqdm(uploaded_files, desc="ファイルデータの取得中..."):
+        # ファイル名を取得（Streamlit UploadedFileオブジェクトから）
+        file_name = uploaded_file.name
         
-        try:
-            df = pd.read_excel(file_path, usecols=[1], nrows=2)
-            store_code = str(df.iloc[1, 0])
-            
-            # P/Lデータを含むDataFrameを読み込む
-            df_pl = pd.read_excel(file_path, header=6)
-            
-            # 辞書にDataFrameを店舗コードとともに格納
-            dataframes[f"df_{store_code}"] = df_pl
-        except Exception as e:
-            print(f"Error processing file {file_name}: {e}")
+        # アップロードされたファイルからデータフレームを読み込む
+        # UploadedFileオブジェクトを利用して直接Pandasで読み込む
+        df = pd.read_excel(uploaded_file, header=6)  # 適切なヘッダー行を設定
 
-    print('P/Lデータの読み取り完了。🎉')
+        # DataFrameをディクショナリに格納（キーはファイル名）
+        dataframes[file_name] = df
+
     return dataframes
 
 def initialize_output_dataframes(dataframes):
