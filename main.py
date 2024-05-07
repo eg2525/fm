@@ -7,7 +7,7 @@ st.title("FM分割")
 
 # ファイルアップロードウィジェットを表示し、ファイルをアップロード
 uploaded_PLfiles = st.file_uploader("P/Lファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
-uploaded_Withfiles = st.file_upoader("引出金ファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
+uploaded_Withfiles = st.file_uploader("引出金ファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
 
 
 
