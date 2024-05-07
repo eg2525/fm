@@ -26,6 +26,8 @@ if uploaded_files is not None and withdraw_path is not None:
 		output_dataframes = tax_mapping(tax_data_path, output_dataframes)
 
 		dataframes_with = withdraw_preparing(withdraw_path)
+
+		dataframes_with = withdraw_mapping(dataframes_with)
 		
 		# ドロップダウンメニューからデータフレームを選択
 		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))

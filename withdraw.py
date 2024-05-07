@@ -27,7 +27,7 @@ def withdraw_preparing(uploaded_files):
 
 # 既存のdataframes_with辞書から各DataFrameを処理
 def withdraw_mapping(dataframes_with):
-	for store_withdraw, df_with in tqdm(dataframes_with.items(), desc= '引出金データ作成中'):
+	for store_withdraw, df_with in dataframes_with.items():
 	    # '日'列から'金額 (円)'の前までの列を特定
 	    if "日" in df_with.columns and "金    額  (円)" in df_with.columns:
 	        start_col = df_with.columns.get_loc("日") + 1
