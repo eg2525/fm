@@ -15,4 +15,5 @@ uploaded_Withfiles = st.file_uploader("引出金ファイルを複数アップ�
 
 # ファイルがアップロードされた後、'OK'ボタンが押されるのを待つ
 if uploaded_files is not None and uploaded_Withfiles is not None:
+	if st.checkbox('start')
     preparing_1 = PL_road(uploaded_files)
