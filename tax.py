@@ -35,7 +35,7 @@ def tax_mapping(tax_data_path, output_dataframes):
 
 
 #仮払仮受消費税処理
-def tax_adjustment(df_tax,output_dataframes)
+def tax_adjustment(df_tax,output_dataframes):
     #df_tax = pd.read_csv(r'C:\Users\inagaki23\Desktop\FamilyMart\tax_info.csv', header=1, encoding='cp932')
 
     condition = df_tax['税・売上仕入種別'].isin(['１０％課税', '＊８％課税', '旧８％課税'])
