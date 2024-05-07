@@ -183,5 +183,5 @@ def output_to_csv(output_dataframes):
         mime="application/zip"
     )
 
-	if st.button('Create and Download ZIP'):
+    if st.button('Create and Download ZIP'):
         output_to_csv(output_dataframes)
