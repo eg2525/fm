@@ -19,11 +19,16 @@ if uploaded_files is not None and uploaded_Withfiles is not None:
 		dataframes = PL_road(uploaded_files)
 
 		output_dataframes = initialize_output_dataframes(dataframes)
-		
-		# Streamlitアプリケーションですべてのデータフレーム名を表示
-		if output_dataframes:
-		    st.write("格納されたすべてのデータフレームの名前:")
-		    for key in output_dataframes.keys():
-		        st.write(key)
+
+		# 特定のExcelファイル名を指定
+		file_name_to_view = "エバーグリーン　PL2402-65.xlsx_output"
+
+		# ファイル名に "_output" を追加してキーを形成
+		key_to_view = f"{file_name_to_view}_output"
+
+		# Streamlitアプリケーションで指定ファイルのデータフレームを表示
+		if key_to_view in output_dataframes:
+		    st.write(f"データフレーム ({file_name_to_view}):")
+		    st.dataframe(output_dataframes[key_to_view])
 		else:
-		    st.write("データフレームはありません。")
+		    st.error(f"データフレーム '{file_name_to_view}' が見つかりません。")
