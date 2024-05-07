@@ -28,6 +28,8 @@ if uploaded_files is not None and withdraw_path is not None:
 		dataframes_with = withdraw_preparing(withdraw_path)
 
 		dataframes_with = withdraw_mapping(dataframes_with)
+
+		output_dataframes = mapping_preparing(dataframes_with , output_dataframes)
 		
 		# ドロップダウンメニューからデータフレームを選択
 		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))

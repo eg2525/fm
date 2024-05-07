@@ -46,7 +46,7 @@ def initialize_output_dataframes(dataframes):
     return output_dataframes
 
 def mapping_preparing(dataframes_with , output_dataframes):
-    for key, withdraw_df in tqdm(dataframes_with.items(), desc="データ転記前の準備中..."):
+    for key, withdraw_df in dataframes_with.items():
         output_key = f"{key}_output"
         if output_key in output_dataframes:
             output_df = output_dataframes[output_key]
@@ -65,4 +65,5 @@ def mapping_preparing(dataframes_with , output_dataframes):
             
             output_dataframes[output_key] = output_df  # 更新されたDataFrameを再格納
 
-        print('行追加完了🌟')
+        st.write('データ転記前の準備完了🌟')
+        return output_dataframes
