@@ -62,7 +62,7 @@ def mapping_df(dataframes, output_dataframes):
 	        output_df.dropna(how='all', inplace=True)
 	        output_dataframes[output_key] = output_df  # 更新されたDataFrameを再格納
 
-	print('done🎉')
+	st.write('転記完了🎉')
 	return output_dataframes
 
 
