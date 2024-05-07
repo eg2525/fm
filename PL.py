@@ -14,7 +14,7 @@ def PL_road(uploaded_files):
         progress_bar.progress((i + 1) / total_files)  # 進捗バーを更新
 
     progress_bar.empty()  # 処理終了後に進捗バーを非表示にする
-    print('PLデータの読み取りが完了')
+    st.write('PLデータの読み取りが完了')
     return dataframes
 
 def initialize_output_dataframes(dataframes):
