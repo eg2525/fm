@@ -28,3 +28,10 @@ if uploaded_files is not None and uploaded_Withfiles is not None:
 		else:
 		    st.write("データフレームはまだ生成されていません。")
 
+		# ドロップダウンメニューからデータフレームを選択
+		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))
+
+		# 選択されたデータフレームを表示
+		if file_name_to_view:
+		    st.dataframe(output_dataframes[file_name_to_view])
+
