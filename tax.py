@@ -38,9 +38,9 @@ def tax_mapping(tax_data_path, output_dataframes):
 
 
 #仮払仮受消費税処理
-def tax_adjustment(df_tax,output_dataframes):
-    #df_tax = pd.read_csv(r'C:\Users\inagaki23\Desktop\FamilyMart\tax_info.csv', header=1, encoding='cp932')
+def tax_adjustment(df_tax_info,output_dataframes):
 
+    df_tax = pd.read_csv(df_tax_info, header=1, encoding='cp932')
     condition = df_tax['税・売上仕入種別'].isin(['１０％課税', '＊８％課税', '旧８％課税'])
     df_tax_provi = df_tax[condition]
     df_tax_provi = df_tax_provi.reset_index(drop=True)
@@ -56,7 +56,7 @@ def tax_adjustment(df_tax,output_dataframes):
         output_dataframes[key] = output_df
 
     # df_tax_proviからのデータ転記
-    for key, output_df in tqdm(output_dataframes.items(), desc="10%消費税データ転記中..."):
+    for key, output_df in output_dataframes.items():
         store_name = key.replace('df_', '').replace('_output', '')
         # 一致する店舗のデータを抽出
         store_data = df_tax_provi[df_tax_provi['店舗名称'] == store_name]
@@ -78,7 +78,7 @@ def tax_adjustment(df_tax,output_dataframes):
                 output_df.at[target_index, '借方科目'] = 158
                 output_df.at[target_index, '貸方科目'] = 215
 
-    for key, output_df in tqdm(output_dataframes.items(), desc="8%(軽)消費税データ転記中..."):
+    for key, output_df in output_dataframes.items():
         store_name = key.replace('df_', '').replace('_output', '')
         # 一致する店舗のデータを抽出
         store_data = df_tax_provi[df_tax_provi['店舗名称'] == store_name]
@@ -100,7 +100,7 @@ def tax_adjustment(df_tax,output_dataframes):
                 output_df.at[target_index, '借方科目'] = 158
                 output_df.at[target_index, '貸方科目'] = 215     
                 
-    for key, output_df in tqdm(output_dataframes.items(), desc="8%消費税データ転記中..."):
+    for key, output_df in output_dataframes.items():
         store_name = key.replace('df_', '').replace('_output', '')
         # 一致する店舗のデータを抽出
         store_data = df_tax_provi[df_tax_provi['店舗名称'] == store_name]
@@ -120,5 +120,5 @@ def tax_adjustment(df_tax,output_dataframes):
                 output_df.at[target_index, '借方科目'] = 158
                 output_df.at[target_index, '貸方科目'] = 999     
                 
-    print('消費税データ転記完了🌟')
+    st.write('消費税データ転記完了🌟')
     return output_dataframes

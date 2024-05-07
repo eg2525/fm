@@ -10,9 +10,10 @@ from withdraw import withdraw_preparing, withdraw_mapping
 from tax import tax_mapping, tax_adjustment
 from PL_process import mapping_df, PL_mapping, adjustment_df, dropping_df, output_to_csv
 
-uploaded_files = st.file_uploader("P/Lファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
-withdraw_path = st.file_uploader("引出金ファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
+uploaded_files = st.file_uploader("P/Lファイルを全てアップロードしてください", type=['xlsx'], accept_multiple_files=True)
+withdraw_path = st.file_uploader("引出金ファイルを全てアップロードしてください", type=['xlsx'], accept_multiple_files=True)
 tax_data_path = 'tax_data_R4.csv'
+df_tax_info = st.file_uploader("消費税データをアップロードしてください", type=['csv'])
 
 # ファイルがアップロードされた後、'OK'ボタンが押されるのを待つ
 if uploaded_files is not None and withdraw_path is not None:
@@ -32,6 +33,8 @@ if uploaded_files is not None and withdraw_path is not None:
 		output_dataframes = mapping_preparing(dataframes_with , output_dataframes)
 
 		output_dataframes = PL_mapping(dataframes_with, output_dataframes)
+
+		output_dataframes = tax_adjustment(df_tax_info,output_dataframes)
 		
 		# ドロップダウンメニューからデータフレームを選択
 		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))
