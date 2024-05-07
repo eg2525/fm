@@ -13,8 +13,13 @@ def PL_road(uploaded_files):
 
     for i, uploaded_file in enumerate(uploaded_files):
         file_name = uploaded_file.name
+        # 先に店舗コードを含むセルのデータを読み取り
+        store_code_df = pd.read_excel(uploaded_file, usecols=[1], nrows=2)
+        store_code = str(store_code_df.iloc[1, 0])  # 2行目のデータをstore_codeとして取得
+
+        # P/Lデータ全体を読み込む
         df = pd.read_excel(uploaded_file, header=6)  # ファイルからDataFrameを読み込む
-        dataframes[file_name] = df
+        dataframes[f"df_{store_code}"] = df
         progress_bar.progress((i + 1) / total_files)  # 進捗バーを更新
 
     progress_bar.empty()  # 処理終了後に進捗バーを非表示にする
