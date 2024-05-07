@@ -20,15 +20,15 @@ if uploaded_files is not None and uploaded_Withfiles is not None:
 
 		output_dataframes = initialize_output_dataframes(dataframes)
 
-		# 特定のExcelファイル名を指定
-		file_name_to_view = "エバーグリーン　PL2402-65.xlsx_output"
+		# 上記で定義した initialize_output_dataframes 関数を呼び出し後に
+		output_dataframes = initialize_output_dataframes(dataframes)
 
-		# ファイル名に "_output" を追加してキーを形成
-		key_to_view = f"{file_name_to_view}_output"
+		# 特定のファイル名を指定（例: 'エバーグリーン PL2402-01.xlsx_output'）
+		file_name_to_view = "エバーグリーン PL2402-01.xlsx_output"
 
 		# Streamlitアプリケーションで指定ファイルのデータフレームを表示
-		if key_to_view in output_dataframes:
+		if file_name_to_view in output_dataframes:
 		    st.write(f"データフレーム ({file_name_to_view}):")
-		    st.dataframe(output_dataframes[key_to_view])
+		    st.dataframe(output_dataframes[file_name_to_view])
 		else:
 		    st.error(f"データフレーム '{file_name_to_view}' が見つかりません。")
