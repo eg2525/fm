@@ -12,6 +12,7 @@ from PL_process import mapping_df, PL_mapping, adjustment_df, dropping_df, outpu
 
 uploaded_files = st.file_uploader("P/Lファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
 uploaded_Withfiles = st.file_uploader("引出金ファイルを複数アップロードしてください", type=['xlsx'], accept_multiple_files=True)
+tax_data_path = 'tax_data_R4.csv'
 
 # ファイルがアップロードされた後、'OK'ボタンが押されるのを待つ
 if uploaded_files is not None and uploaded_Withfiles is not None:
@@ -22,6 +23,7 @@ if uploaded_files is not None and uploaded_Withfiles is not None:
 
 		output_dataframes = mapping_df(dataframes, output_dataframes)
 
+		output_dataframes = tax_mapping(tax_data_path, output_dataframes)
 		
 		# ドロップダウンメニューからデータフレームを選択
 		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))

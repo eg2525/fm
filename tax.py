@@ -9,7 +9,7 @@ def tax_mapping(tax_data_path, output_dataframes):
     tax_data = pd.read_csv(tax_data_path, encoding = 'cp932')
 
     # dataframes および output_dataframes のデータを更新
-    for key, output_df in tqdm(output_dataframes.items(), desc = '消費税データ処理中...'):
+    for key, output_df in output_dataframes.items():
         # '借方勘定科目'を照合して、'借方税区分'を更新
         # output_df の '借方科目' と tax_data の '科目' を照合
         for idx, row in output_df.iterrows():
@@ -30,8 +30,8 @@ def tax_mapping(tax_data_path, output_dataframes):
         # 更新されたDataFrameを保存
         output_dataframes[key] = output_df    
         
-    print("done🎉")
-    return output_df
+    print("消費税転記が完了🎉")
+    return output_dataframes
 
 
 #仮払仮受消費税処理
