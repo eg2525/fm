@@ -41,10 +41,23 @@ if uploaded_files is not None and withdraw_path is not None:
 		output_dataframes = dropping_df(output_dataframes)
 
 		output_to_csv(output_dataframes)
-		
+
+		# 関数を呼び出してZIPファイルを準備
+		if st.button('Create and Download ZIP'):
+		    zip_buffer = output_to_csv(output_dataframes)
+		    zip_buffer.seek(0)
+		    st.download_button(
+		        label="Download CSV Files as ZIP",
+		        data=zip_buffer,
+		        file_name="output_files.zip",
+		        mime="application/zip"
+		    )
+		    
+		_ = '''
 		# ドロップダウンメニューからデータフレームを選択
 		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))
 
 		# 選択されたデータフレームを表示
 		if file_name_to_view:
 		    st.dataframe(output_dataframes[file_name_to_view])
+		'''

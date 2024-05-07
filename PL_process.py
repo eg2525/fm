@@ -173,15 +173,4 @@ def output_to_csv(output_dataframes):
             output_df.to_csv(csv_buffer, encoding='utf-8-sig', index=False, float_format='%.0f')
             csv_buffer.seek(0)
             zip_file.writestr(f"{key}.csv", csv_buffer.getvalue())
-
-    # ZIPファイル用のダウンロードリンクをStreamlitで提供
-    zip_buffer.seek(0)
-    st.download_button(
-        label="Download CSV Files as ZIP",
-        data=zip_buffer,
-        file_name="output_files.zip",
-        mime="application/zip"
-    )
-
-    if st.button('Create and Download ZIP'):
-        output_to_csv(output_dataframes)
+    return zip_buffer
