@@ -68,7 +68,7 @@ def mapping_df(dataframes, output_dataframes):
 
 def PL_mapping(dataframes_with, output_dataframes):
 	# データ転記処理
-	for key, withdraw_df in tqdm(dataframes_with.items(), desc="データ転記中..."):
+	for key, withdraw_df in dataframes_with.items():
 	    output_key = f"{key}_output"
 	    output_df = output_dataframes[output_key]  # 一致する出力DataFrameを取得
 
@@ -92,7 +92,7 @@ def PL_mapping(dataframes_with, output_dataframes):
 
 	    output_dataframes[output_key] = output_df  # 更新されたDataFrameを再格納
 
-	print('データ転記および科目設定完了🌟')
+	st.write('データ転記および科目設定完了🌟')
 	return output_dataframes
 
 #調整
