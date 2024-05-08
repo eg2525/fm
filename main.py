@@ -10,10 +10,10 @@ from withdraw import withdraw_preparing, withdraw_mapping
 from tax import tax_mapping, tax_adjustment
 from PL_process import mapping_df, PL_mapping, adjustment_df, dropping_df
 
-st.title('FM自動仕訳生成')
+st.title('FM自動仕訳作成')
 
 st.markdown('''
-    ### 手順
+    ### 手順 ※月一回のみ。全店の仕訳が作成されます。
     1. P/Lデータを分割→Acrobatでexcel化→アップロード
     2. 引出金データを分割→Acrobatでexcel化→アップロード
     3. 消費税データcsvをアップロード
