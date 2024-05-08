@@ -13,9 +13,9 @@ from PL_process import mapping_df, PL_mapping, adjustment_df, dropping_df
 st.title('FM自動仕訳生成')
 
 st.markdown('''
-	1.P/Lデータを分割→Acrobatでexcel化→アップロード
-	2.引出金データを分割→Acrobatでexcel化→アップロード
-	3.消費税データcsvをアップロード
+	1.P/Lデータを分割→Acrobatでexcel化→アップロード 
+	2.引出金データを分割→Acrobatでexcel化→アップロード 
+	3.消費税データcsvをアップロード 
 	''')
 
 uploaded_files = st.file_uploader("P/Lファイルを全てアップロードしてください", type=['xlsx'], accept_multiple_files=True)
