@@ -47,11 +47,11 @@ if uploaded_files and withdraw_path and df_tax_info:
             mime="application/zip"
         )   
 
-		_ = '''
-		# ドロップダウンメニューからデータフレームを選択
-		file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))
+_ = '''
+# ドロップダウンメニューからデータフレームを選択
+file_name_to_view = st.selectbox("データフレームを選択してください", list(output_dataframes.keys()))
 
-		# 選択されたデータフレームを表示
-		if file_name_to_view:
-		    st.dataframe(output_dataframes[file_name_to_view])
-		'''
+# 選択されたデータフレームを表示
+if file_name_to_view:
+    st.dataframe(output_dataframes[file_name_to_view])
+'''
