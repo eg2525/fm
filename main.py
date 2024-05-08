@@ -10,6 +10,14 @@ from withdraw import withdraw_preparing, withdraw_mapping
 from tax import tax_mapping, tax_adjustment
 from PL_process import mapping_df, PL_mapping, adjustment_df, dropping_df
 
+st.title('FM自動仕訳生成')
+
+st.markdown('''
+	1.P/Lデータを分割→Acrobatでexcel化→アップロード
+	2.引出金データを分割→Acrobatでexcel化→アップロード
+	3.消費税データcsvをアップロード
+	''')
+
 uploaded_files = st.file_uploader("P/Lファイルを全てアップロードしてください", type=['xlsx'], accept_multiple_files=True)
 withdraw_path = st.file_uploader("引出金ファイルを全てアップロードしてください", type=['xlsx'], accept_multiple_files=True)
 tax_data_path = 'tax_data_R4.csv'
